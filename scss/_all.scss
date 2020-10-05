@@ -88,6 +88,10 @@ button {
   border-radius: 5px;
 }
 
+#phrase li {
+  padding: 10px;
+}
+
 .space {
   width: 15px;
 }
@@ -121,7 +125,7 @@ button {
 
 /* Overlay */
 
-#overlay {
+#overlay, .win, .lose {
   display: flex;
   flex-direction: column;
   position: fixed;
@@ -132,6 +136,10 @@ button {
   left: 0;
   right: 0;
   border-radius: 5px;
+}
+
+.hidden {
+  display: none;
 }
 
 .title {
