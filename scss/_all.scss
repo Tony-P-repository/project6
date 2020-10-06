@@ -77,28 +77,60 @@ button {
 
 /* Phrase */
 
-.letter {
-  font-size: var(--font-size-medium);
-  height: 65px;
-  width: 65px;
-  padding: 20px 1px 0 1px;
-  margin-right: 2px;
-  color: transparent;
-  background: var(--color-neutral-light);
-  border-radius: 5px;
+#phrase div {
+  padding: 10px;
 }
 
-#phrase li {
-  padding: 10px;
+.letter {
+  height: 65px;
+  width: 65px;
+  margin-right: 3px;
+  position: relative;
+  perspective-origin: bottom center;
+  perspective: 500px;
+
+  div {
+    height: 65px;
+    width: 65px;
+    border-radius: 5px;
+    position: absolute;
+
+    transform-origin: center;
+    backface-visibility: hidden;
+    transition: transform 1s cubic-bezier(0.25, 0.2, 0.35, 1.42);
+  }
+
+  div.a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    text-transform: uppercase;
+    font-size: 2.4em;
+    font-weight: 600;
+    color: #FFF;
+    background-color: #76CE82;
+
+    transform: rotate3d(1, 0, 0, -180deg);
+  }
+
+  div.b {
+    background-color: var(--color-neutral-light);
+  }
+}
+
+.show {
+  div.a {
+    transform: rotate3d(1, 0, 0, -720deg);
+  }
+
+  div.b {
+    transform: rotate3d(1, 0, 0, -720deg + 180deg);
+  }
 }
 
 .space {
   width: 15px;
-}
-
-.show {
-  color: #000;
-  background-color: #76CE82;
 }
 
 /* Keyboard */
@@ -148,6 +180,7 @@ button {
 
 .start {
   background-color: var(--color-start);
+  z-index: 1;
 }
 
 .start a {
@@ -156,6 +189,7 @@ button {
 
 .win {
   background-color: var(--color-win);
+  z-index: 1;
 }
 
 .win a {
@@ -164,6 +198,7 @@ button {
 
 .lose {
   background-color: var(--color-lose);
+  z-index: 1;
 }
 
 .lose a {

@@ -15,7 +15,6 @@ document.addEventListener("DOMContentLoaded", () => {
     "bite the bullet",
     "lame duck",
     "pass the buck",
-    "up the pole",
     "charm offensive",
     "tall story"
   ];
@@ -27,17 +26,23 @@ document.addEventListener("DOMContentLoaded", () => {
   function addPhrasetoDisplay(phrase) {
     for (char in phrase) {
       const li = document.createElement("li");
-      li.textContent = phrase[char];
+      const divA = document.createElement("div");
+      const divB = document.createElement("div");
+      li.appendChild(divA);
+      li.appendChild(divB);
+      divA.textContent = phrase[char];
+      divA.classList.add("a");
+      divB.classList.add("b");
       if (phrase[char] !== String.fromCharCode(32)) {
         li.classList.add("letter");
       }
-      displayedPhrase.appendChild(li);
+      displayedPhrase.children[0].appendChild(li);
     }
   }
 
   function checkLetter(button) {
     const char = button.textContent.toLowerCase();
-    const lis = displayedPhrase.children;
+    const lis = displayedPhrase.children[0].children;
     let found = false;
     for (let i = 0; i < lis.length; i++) {
       if (char === lis[i].textContent) {
