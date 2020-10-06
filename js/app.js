@@ -8,6 +8,10 @@
 
 document.addEventListener("DOMContentLoaded", () => {
 
+  /* ============================================= */
+  /*              Declarations                     */
+  /* ============================================= */
+
   let missed = 0;
   const phrases = [
     "hit for six",
@@ -65,9 +69,29 @@ document.addEventListener("DOMContentLoaded", () => {
         winOverlay.classList.remove("hidden");
       }, 1000);
     } else if (missed >= 5) {
-      window.setTimeout(() => {
-        lossOverlay.classList.remove("hidden");
-      }, 1000);
+      lossOverlay.classList.remove("hidden");
+    }
+  }
+
+  function clearPhraseDisplay() {
+    const phraseLis = displayedPhrase.querySelectorAll("li");
+    for (let i = 0; i < phraseLis.length; i++) {
+      phraseLis[i].remove();
+    }
+  }
+
+  function clearScoreboard() {
+    const tries = scoreboard.querySelectorAll("li.tries");
+    for (let i = 0; i < tries.length; i++) {
+      tries[i].children[0].src = "images/liveHeart.png";
+    }
+  }
+
+  function clearQwerty() {
+    const buttons = qwerty.querySelectorAll("button.chosen");
+    for (let i = 0; i < buttons.length; i++) {
+      buttons[i].classList.remove("chosen");
+      buttons[i].disabled = null;
     }
   }
 
@@ -75,11 +99,11 @@ document.addEventListener("DOMContentLoaded", () => {
   /*              Selectors                        */
   /* ============================================= */
 
+  const mainContainer = document.querySelector("div.main-container");
   const qwerty = document.querySelector("#qwerty");
   const displayedPhrase = document.querySelector("#phrase");
-  const startButton = document.querySelector("a.btn__reset");
   const scoreboard = document.querySelector("#scoreboard");
-  const startOverlay = document.querySelector("div#overlay");
+  const startOverlay = document.querySelector("div.start");
   const winOverlay = document.querySelector("div.win");
   const lossOverlay = document.querySelector("div.lose");
 
@@ -87,11 +111,18 @@ document.addEventListener("DOMContentLoaded", () => {
   /*              Event handlers                   */
   /* ============================================= */
 
-  startButton.addEventListener("click", () => {
-    startOverlay.style.display = "none";
-
-    const phraseArray = getRandomPhraseAsArray(phrases);
-    addPhrasetoDisplay(phraseArray);
+  mainContainer.addEventListener("click", (event) => {
+    if (event.target.classList.contains("btn__reset")) {
+      startOverlay.classList.add("hidden");
+      lossOverlay.classList.add("hidden");
+      winOverlay.classList.add("hidden");
+      const phraseArray = getRandomPhraseAsArray(phrases);
+      clearPhraseDisplay();
+      clearQwerty();
+      clearScoreboard();
+      addPhrasetoDisplay(phraseArray);
+      missed = 0;
+    }
   });
 
   qwerty.addEventListener("click", (event) => {

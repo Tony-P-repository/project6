@@ -480,7 +480,7 @@ button {
 }
 
 /* Overlay */
-#overlay, .win, .lose {
+.start, .win, .lose {
   display: flex;
   flex-direction: column;
   position: fixed;
